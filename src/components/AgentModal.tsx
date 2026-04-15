@@ -12,9 +12,11 @@ import {
   X,
   CheckCircle2,
 } from 'lucide-react'
+import type { LucideProps } from 'lucide-react'
 import type { Agent } from '../data/agents'
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const iconMap: Record<string, React.ComponentType<LucideProps | any>> = {
   cpu: Cpu,
   search: Search,
   calendar: CalendarDays,
