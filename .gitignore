@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.local
+
+# Playwright temp files
+.playwright-cli/
+
+# Dev screenshots
+traxai-*.png
+netfusion-*.png
+mxpp-*.png
