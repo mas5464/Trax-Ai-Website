@@ -1,3 +1,5 @@
+import Logo from './Logo'
+
 const productLinks = [
   'Platform Overview',
   'Agent Core',
@@ -28,10 +30,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1 — Brand */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <img src="/airvoyant-logo.svg" alt="Trax AI" className="h-8" />
-              <span className="font-bold text-white text-lg">TRAX AI</span>
-            </div>
+            <Logo size="sm" />
             <p className="text-sm text-[#9BA3B0]">AI-Powered MRO Intelligence</p>
             <p className="text-xs text-[#9BA3B0] leading-relaxed">
               27 years of aviation expertise

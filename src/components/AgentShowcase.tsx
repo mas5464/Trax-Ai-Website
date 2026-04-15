@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   Cpu,
   Search,
@@ -11,6 +12,8 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { agents } from '../data/agents'
+import type { Agent } from '../data/agents'
+import AgentModal from './AgentModal'
 
 const iconMap: Record<string, React.ReactNode> = {
   cpu: <Cpu size={20} />,
@@ -36,6 +39,8 @@ const item = {
 }
 
 export default function AgentShowcase() {
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
+
   return (
     <section id="agents" className="py-24 bg-[#111620]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -67,7 +72,8 @@ export default function AgentShowcase() {
             <motion.div
               key={agent.id}
               variants={item}
-              className="gradient-border-card group cursor-default"
+              onClick={() => setSelectedAgent(agent)}
+              className="gradient-border-card group cursor-pointer"
             >
               <div className="p-5 flex flex-col gap-4 h-full">
                 {/* Top row: icon + metric badge */}
@@ -95,19 +101,24 @@ export default function AgentShowcase() {
                   </p>
                 </div>
 
-                {/* Footer: status + arrow */}
-                <div className="flex items-center justify-between pt-2 border-t border-[#1E2533]">
-                  <span
-                    className="text-xs font-medium px-2 py-1 rounded-full border"
-                    style={{ color: agent.color, borderColor: `${agent.color}40` }}
-                  >
-                    {agent.status}
-                  </span>
-                  <span
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ color: agent.color }}
-                  >
-                    <ArrowRight size={16} />
+                {/* Footer: status + arrow + explore hint */}
+                <div className="flex flex-col gap-1 pt-2 border-t border-[#1E2533]">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="text-xs font-medium px-2 py-1 rounded-full border"
+                      style={{ color: agent.color, borderColor: `${agent.color}40` }}
+                    >
+                      {agent.status}
+                    </span>
+                    <span
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      style={{ color: agent.color }}
+                    >
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+                  <span className="text-xs text-[#4B5563] opacity-0 group-hover:opacity-100 transition-opacity duration-200 mt-0.5">
+                    Click to explore →
                   </span>
                 </div>
               </div>
@@ -115,6 +126,12 @@ export default function AgentShowcase() {
           ))}
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedAgent && (
+          <AgentModal agent={selectedAgent} onClose={() => setSelectedAgent(null)} />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

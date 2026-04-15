@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
+import Logo from './Logo'
 
 const navLinks = [
   { label: 'Product', href: '#platform' },
@@ -38,10 +39,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img src="/airvoyant-logo.svg" alt="Trax AI" className="h-8" />
-            <span className="font-bold text-white text-lg tracking-wide">TRAX AI</span>
-          </div>
+          <a href="#" aria-label="Trax AI home">
+            <Logo size="md" />
+          </a>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-8">
